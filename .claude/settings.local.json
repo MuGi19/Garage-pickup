@@ -8,7 +8,13 @@
       "PowerShell($nodeDir = \"$env:ProgramFiles\\\\nodejs\"; $env:Path = \"$nodeDir;$env:Path\"; & \"$nodeDir\\\\node.exe\" --version; & \"$nodeDir\\\\npm.cmd\" --version)",
       "mcp__Claude_Preview__preview_start",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git config *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "PowerShell($conns = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($conns\\) { foreach \\($c in $conns\\) { Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep -Milliseconds 600; \"freed port 3000\" } else { \"port 3000 already free\" })"
     ]
   }
 }

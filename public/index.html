@@ -3,41 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Revive Mobile Auto — Elite Concierge Mechanics</title>
+    <title>PIT • STOP — Mobile Mechanics, Bahrain</title>
     <meta
       name="description"
-      content="Revive Mobile Auto — elite concierge mobile mechanics in Bahrain. A master technician comes to your residence or office to service your car."
+      content="PIT STOP — your mobile mechanic in Bahrain. A master technician comes to your residence or office to service your car. Book online in minutes."
     />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <style>
       :root {
-        --bg: #0d0d0f;
-        --card: #15151c;
-        --card-border: rgba(201, 162, 39, 0.18);
-        --field-bg: #0f0f14;
+        --bg: #0b0d09;
+        --panel: #0e110b;
+        --card: #14160f;
+        --card-border: rgba(197, 242, 60, 0.16);
+        --field-bg: #0d0f0a;
         --field-border: rgba(255, 255, 255, 0.08);
-        --gold: #c9a227;
-        --gold-light: #f3d779;
-        --gold-grad: linear-gradient(135deg, #f3d779 0%, #c9a227 55%, #a8851a 100%);
-        --text: #ece9e3;
-        --muted: #8a8a93;
-        --error: #e06363;
-        --success: #6fcf97;
+        --lime: #c5f23c;
+        --lime-light: #dcff79;
+        --lime-grad: linear-gradient(135deg, #dcff79 0%, #c5f23c 55%, #a9d92a 100%);
+        --ink: #10130a;
+        --text: #eef1e8;
+        --muted: #8b9082;
+        --error: #ff6b6b;
         --radius: 18px;
-        --serif: 'Playfair Display', Georgia, serif;
+        --display: 'Sora', system-ui, sans-serif;
         --sans: 'Inter', system-ui, -apple-system, sans-serif;
       }
 
       * {
         box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       html,
@@ -48,75 +53,318 @@
 
       body {
         background: var(--bg);
-        background-image:
-          radial-gradient(
-            900px circle at 50% -10%,
-            rgba(201, 162, 39, 0.1),
-            transparent 60%
-          ),
-          radial-gradient(
-            700px circle at 100% 100%,
-            rgba(201, 162, 39, 0.05),
-            transparent 55%
-          );
         color: var(--text);
         font-family: var(--sans);
         font-weight: 300;
         line-height: 1.6;
         min-height: 100vh;
+        /* faint blueprint grid */
+        background-image:
+          linear-gradient(rgba(197, 242, 60, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(197, 242, 60, 0.035) 1px, transparent 1px),
+          radial-gradient(
+            900px circle at 50% -5%,
+            rgba(197, 242, 60, 0.08),
+            transparent 60%
+          );
+        background-size: 46px 46px, 46px 46px, 100% 100%;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      /* ============================================================ */
+      /* Navbar                                                        */
+      /* ============================================================ */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(11, 13, 9, 0.82);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .nav {
+        max-width: 1180px;
+        margin: 0 auto;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        padding: 48px 20px 64px;
+        gap: 22px;
+        padding: 13px 24px;
       }
 
-      /* ---------------- Header ---------------- */
-      header {
-        text-align: center;
-        margin-bottom: 38px;
-        max-width: 640px;
+      /* Brand / logo */
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        border: 2px solid var(--lime);
+        border-radius: 14px;
+        padding: 5px 15px 5px 6px;
+        flex-shrink: 0;
       }
 
-      .brand {
-        font-family: var(--serif);
+      .logo-badge {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: var(--lime-grad);
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 16px rgba(197, 242, 60, 0.4);
+      }
+
+      .logo-badge svg {
+        width: 19px;
+        height: 19px;
+        stroke: var(--ink);
+      }
+
+      .logo-text {
+        font-family: var(--display);
         font-weight: 800;
-        letter-spacing: 0.04em;
-        font-size: clamp(2.1rem, 6vw, 3.4rem);
-        line-height: 1.05;
-        margin: 0;
-        background: linear-gradient(180deg, #ffffff 0%, #cfcfcf 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        letter-spacing: 0.05em;
+        font-size: 1.05rem;
+        color: var(--text);
+        white-space: nowrap;
       }
 
-      .subtitle {
-        margin: 12px 0 0;
-        font-size: clamp(0.72rem, 2.4vw, 0.85rem);
-        letter-spacing: 0.42em;
-        text-transform: uppercase;
+      .logo-text .dot {
+        color: var(--lime);
+        margin: 0 2px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+        margin: 0 0 0 18px;
+        padding: 0;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 0.95rem;
         font-weight: 500;
-        background: var(--gold-grad);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        transition: color 0.2s ease;
       }
 
-      /* ---------------- Card ---------------- */
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .nav-cta {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        letter-spacing: 0.02em;
+        color: var(--text);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .live-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #ff4d4d;
+        box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55);
+        animation: pulse 1.8s infinite;
+      }
+
+      .btn-book {
+        background: var(--lime-grad);
+        color: var(--ink);
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        padding: 11px 22px;
+        border-radius: 999px;
+        white-space: nowrap;
+        transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+        box-shadow: 0 10px 24px -10px rgba(197, 242, 60, 0.7);
+      }
+
+      .btn-book:hover {
+        filter: brightness(1.06);
+        box-shadow: 0 14px 30px -10px rgba(197, 242, 60, 0.85);
+      }
+
+      .btn-book:active {
+        transform: translateY(1px);
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55);
+        }
+        70% {
+          box-shadow: 0 0 0 7px rgba(255, 77, 77, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+        }
+      }
+
+      /* ============================================================ */
+      /* Layout helpers                                               */
+      /* ============================================================ */
+      section,
+      footer {
+        scroll-margin-top: 84px;
+      }
+
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ============================================================ */
+      /* Hero                                                         */
+      /* ============================================================ */
+      .hero {
+        text-align: center;
+        padding: 72px 20px 26px;
+      }
+
+      .hero .eyebrow {
+        display: inline-block;
+        font-size: 0.72rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--lime);
+        border: 1px solid rgba(197, 242, 60, 0.35);
+        border-radius: 999px;
+        padding: 7px 16px;
+        margin-bottom: 26px;
+      }
+
+      .hero h1 {
+        font-family: var(--display);
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        font-size: clamp(2.6rem, 8vw, 5rem);
+        line-height: 1.02;
+        margin: 0;
+      }
+
+      .hero h1 .dot {
+        color: var(--lime);
+      }
+
+      .hero .lead {
+        color: var(--muted);
+        font-size: clamp(1rem, 2.4vw, 1.18rem);
+        max-width: 46ch;
+        margin: 20px auto 0;
+      }
+
+      /* ============================================================ */
+      /* How it works                                                 */
+      /* ============================================================ */
+      .how {
+        padding: 56px 0 20px;
+      }
+
+      .section-title {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+        text-align: center;
+        margin: 0 0 8px;
+      }
+
+      .section-sub {
+        text-align: center;
+        color: var(--muted);
+        margin: 0 auto 40px;
+        max-width: 50ch;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .step {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 28px 24px;
+        transition: border-color 0.25s ease, transform 0.25s ease;
+      }
+
+      .step:hover {
+        border-color: var(--card-border);
+        transform: translateY(-3px);
+      }
+
+      .step-num {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 1.05rem;
+        color: var(--ink);
+        background: var(--lime-grad);
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 18px;
+      }
+
+      .step h3 {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 1.18rem;
+        margin: 0 0 8px;
+      }
+
+      .step p {
+        color: var(--muted);
+        margin: 0;
+        font-size: 0.96rem;
+      }
+
+      /* ============================================================ */
+      /* Booking card                                                 */
+      /* ============================================================ */
+      .book-section {
+        padding: 60px 0 24px;
+      }
+
       .card {
         width: 100%;
-        max-width: 620px;
+        max-width: 640px;
+        margin: 0 auto;
         background: var(--card);
         border: 1px solid var(--card-border);
         border-radius: var(--radius);
-        padding: clamp(26px, 5vw, 48px);
+        padding: clamp(26px, 5vw, 46px);
         box-shadow:
-          0 30px 70px -20px rgba(0, 0, 0, 0.75),
+          0 30px 70px -24px rgba(0, 0, 0, 0.8),
           inset 0 1px 0 rgba(255, 255, 255, 0.03);
       }
 
       .card-title {
-        font-family: var(--serif);
+        font-family: var(--display);
         font-weight: 700;
         font-size: clamp(1.5rem, 4.5vw, 2.1rem);
         margin: 0;
@@ -133,17 +381,16 @@
         width: 64px;
         height: 3px;
         border-radius: 3px;
-        background: var(--gold-grad);
+        background: var(--lime-grad);
       }
 
       .tagline {
         color: var(--muted);
         font-size: 0.96rem;
-        margin: 18px 0 30px;
+        margin: 16px 0 30px;
         max-width: 48ch;
       }
 
-      /* ---------------- Form ---------------- */
       .field {
         margin-bottom: 20px;
       }
@@ -154,7 +401,7 @@
         letter-spacing: 0.18em;
         text-transform: uppercase;
         font-weight: 600;
-        color: var(--gold);
+        color: var(--lime);
         margin-bottom: 9px;
       }
 
@@ -177,11 +424,11 @@
       }
 
       input::placeholder {
-        color: #5a5a63;
+        color: #5c6052;
       }
 
       select {
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c9a227' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c5f23c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
         background-repeat: no-repeat;
         background-position: right 15px center;
         padding-right: 42px;
@@ -190,20 +437,20 @@
 
       select option,
       select optgroup {
-        background: #15151c;
+        background: #14160f;
         color: var(--text);
       }
 
       select optgroup {
-        color: var(--gold-light);
+        color: var(--lime-light);
         font-weight: 600;
       }
 
       input:focus,
       select:focus {
-        border-color: var(--gold);
-        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22);
-        background: #121219;
+        border-color: var(--lime);
+        box-shadow: 0 0 0 3px rgba(197, 242, 60, 0.22);
+        background: #111409;
       }
 
       .row {
@@ -212,7 +459,6 @@
         gap: 18px;
       }
 
-      /* ---------------- Submit button ---------------- */
       button[type='submit'] {
         width: 100%;
         margin-top: 10px;
@@ -222,18 +468,18 @@
         font-family: var(--sans);
         font-size: 0.92rem;
         font-weight: 700;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: #1a1304;
-        background: var(--gold-grad);
+        color: var(--ink);
+        background: var(--lime-grad);
         cursor: pointer;
         transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
-        box-shadow: 0 12px 28px -10px rgba(201, 162, 39, 0.55);
+        box-shadow: 0 12px 28px -10px rgba(197, 242, 60, 0.6);
       }
 
       button[type='submit']:hover {
         filter: brightness(1.06);
-        box-shadow: 0 16px 34px -10px rgba(201, 162, 39, 0.7);
+        box-shadow: 0 16px 34px -10px rgba(197, 242, 60, 0.75);
       }
 
       button[type='submit']:active {
@@ -246,7 +492,6 @@
         filter: grayscale(0.2);
       }
 
-      /* ---------------- Messages ---------------- */
       .message {
         border-radius: 12px;
         padding: 16px 18px;
@@ -260,12 +505,11 @@
       }
 
       .message.error {
-        background: rgba(224, 99, 99, 0.1);
-        border: 1px solid rgba(224, 99, 99, 0.4);
+        background: rgba(255, 107, 107, 0.1);
+        border: 1px solid rgba(255, 107, 107, 0.4);
         color: var(--error);
       }
 
-      /* Elegant success confirmation that replaces the form */
       .confirmation {
         display: none;
         text-align: center;
@@ -284,18 +528,18 @@
         border-radius: 50%;
         display: grid;
         place-items: center;
-        background: rgba(201, 162, 39, 0.12);
-        border: 1px solid rgba(201, 162, 39, 0.45);
+        background: rgba(197, 242, 60, 0.12);
+        border: 1px solid rgba(197, 242, 60, 0.45);
       }
 
       .confirmation .check svg {
         width: 34px;
         height: 34px;
-        stroke: var(--gold-light);
+        stroke: var(--lime-light);
       }
 
       .confirmation h2 {
-        font-family: var(--serif);
+        font-family: var(--display);
         font-weight: 700;
         font-size: 1.6rem;
         margin: 0 0 10px;
@@ -312,7 +556,7 @@
         font-size: 0.78rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--gold);
+        color: var(--lime);
       }
 
       .confirmation .booking-ref span {
@@ -336,16 +580,57 @@
       }
 
       .link-btn:hover {
-        border-color: var(--gold);
-        color: var(--gold-light);
+        border-color: var(--lime);
+        color: var(--lime-light);
       }
 
-      footer {
-        margin-top: 34px;
-        color: #54545c;
+      /* ============================================================ */
+      /* Footer / Contact                                             */
+      /* ============================================================ */
+      .site-footer {
+        margin-top: 70px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        background: var(--panel);
+      }
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 40px 24px;
+      }
+
+      .footer-contact {
+        text-align: right;
+      }
+
+      .footer-contact .big {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 1.35rem;
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      .footer-contact .big:hover {
+        color: var(--lime-light);
+      }
+
+      .footer-contact p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        color: #54584c;
         font-size: 0.78rem;
         letter-spacing: 0.08em;
-        text-align: center;
+        padding: 0 24px 28px;
       }
 
       @keyframes fadeUp {
@@ -359,126 +644,258 @@
         }
       }
 
-      /* ---------------- Mobile ---------------- */
-      @media (max-width: 520px) {
-        body {
-          padding: 32px 14px 48px;
+      /* ============================================================ */
+      /* Responsive                                                   */
+      /* ============================================================ */
+      @media (max-width: 920px) {
+        .nav-links,
+        .phone {
+          display: none;
         }
+      }
+
+      @media (max-width: 720px) {
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .footer-inner {
+          flex-direction: column;
+          text-align: center;
+        }
+        .footer-contact {
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 520px) {
         .row {
           grid-template-columns: 1fr;
           gap: 0;
+        }
+        .hero {
+          padding-top: 52px;
         }
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1 class="brand">REVIVE MOBILE AUTO</h1>
-      <p class="subtitle">Elite Concierge Mechanics</p>
+    <!-- ===================== NAVBAR ===================== -->
+    <header class="site-header">
+      <nav class="nav">
+        <a href="#home" class="logo" aria-label="PIT STOP home">
+          <span class="logo-badge">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+              />
+            </svg>
+          </span>
+          <span class="logo-text">PIT <span class="dot">•</span> STOP</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#book">Services</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-cta">
+          <a class="phone" href="tel:1800748786">
+            <span class="live-dot"></span>1-800-PITSTOP
+          </a>
+          <a class="btn-book" href="#book">Book a mechanic</a>
+        </div>
+      </nav>
     </header>
 
-    <main class="card">
-      <!-- Form view -->
-      <div id="form-view">
-        <h2 class="card-title">Experience Seamless Care</h2>
-        <p class="tagline">
-          Skip the waiting room. Entrust your vehicle to our master technicians
-          from the luxury of your residence or office suite.
+    <!-- ===================== HERO ===================== -->
+    <section id="home" class="hero">
+      <span class="eyebrow">Elite Mobile Mechanics · Bahrain</span>
+      <h1>PIT <span class="dot">•</span> STOP</h1>
+      <p class="lead">
+        Skip the waiting room. Our master technicians come to your residence or
+        office suite — and get you back on the road.
+      </p>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section id="how" class="how">
+      <div class="wrap">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub">
+          Three simple steps between you and a fully serviced car — no garage
+          visit required.
         </p>
-
-        <div id="error-message" class="message error"></div>
-
-        <form id="booking-form" novalidate>
-          <div class="field">
-            <label for="fullName">Full Name</label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              placeholder="John Doe"
-              autocomplete="name"
-              required
-            />
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Book Online</h3>
+            <p>
+              Tell us your car, location and the service you need. It takes under
+              two minutes.
+            </p>
           </div>
-
-          <div class="field">
-            <label for="phone">Phone Number</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="e.g., +973 3333 4444"
-              autocomplete="tel"
-              required
-            />
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>We Come to You</h3>
+            <p>
+              A vetted master technician arrives at your home or office, fully
+              equipped with parts and tools.
+            </p>
           </div>
-
-          <div class="row">
-            <div class="field">
-              <label for="car">Car Make &amp; Model</label>
-              <select id="car" name="car" required>
-                <option value="" disabled selected>-- Select Your Car --</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="year">Year</label>
-              <select id="year" name="year" required>
-                <option value="" disabled selected>-- Select Year --</option>
-              </select>
-            </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Drive Away</h3>
+            <p>
+              We service your vehicle on-site and you're ready to go — backed by
+              our workmanship guarantee.
+            </p>
           </div>
-
-          <div class="field">
-            <label for="location">Vehicle Current Location (Bahrain)</label>
-            <select id="location" name="location" required>
-              <option value="" disabled selected>-- Select Location --</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="service">Service / Spare Part Needed</label>
-            <select id="service" name="service" required>
-              <option value="" disabled selected>
-                -- Select Service Required --
-              </option>
-            </select>
-          </div>
-
-          <button type="submit" id="submit-btn">
-            Schedule Priority Service
-          </button>
-        </form>
-      </div>
-
-      <!-- Confirmation view -->
-      <div id="confirmation" class="confirmation">
-        <div class="check">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
         </div>
-        <h2>Priority Service Booked</h2>
-        <p>
-          Your priority service is booked — a concierge will contact you
-          shortly.
-        </p>
-        <p class="booking-ref">
-          Reference: <span id="booking-id">—</span>
-        </p>
-        <button type="button" class="link-btn" id="new-booking-btn">
-          Book Another Service
-        </button>
       </div>
-    </main>
+    </section>
 
-    <footer>Serving the Kingdom of Bahrain · Residence &amp; Office Suites</footer>
+    <!-- ===================== BOOKING / SERVICES ===================== -->
+    <section id="book" class="book-section">
+      <main class="card">
+        <!-- Form view -->
+        <div id="form-view">
+          <h2 class="card-title">Experience Seamless Care</h2>
+          <p class="tagline">
+            Entrust your vehicle to our master technicians from the luxury of
+            your residence or office suite.
+          </p>
+
+          <div id="error-message" class="message error"></div>
+
+          <form id="booking-form" novalidate>
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="John Doe"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="e.g., +973 3333 4444"
+                autocomplete="tel"
+                required
+              />
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="car">Car Make &amp; Model</label>
+                <select id="car" name="car" required>
+                  <option value="" disabled selected>
+                    -- Select Your Car --
+                  </option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="year">Year</label>
+                <select id="year" name="year" required>
+                  <option value="" disabled selected>-- Select Year --</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="location">Vehicle Current Location (Bahrain)</label>
+              <select id="location" name="location" required>
+                <option value="" disabled selected>-- Select Location --</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="service">Service / Spare Part Needed</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>
+                  -- Select Service Required --
+                </option>
+              </select>
+            </div>
+
+            <button type="submit" id="submit-btn">
+              Schedule Priority Service
+            </button>
+          </form>
+        </div>
+
+        <!-- Confirmation view -->
+        <div id="confirmation" class="confirmation">
+          <div class="check">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2>Priority Service Booked</h2>
+          <p>
+            Your priority service is booked — a concierge will contact you
+            shortly.
+          </p>
+          <p class="booking-ref">Reference: <span id="booking-id">—</span></p>
+          <button type="button" class="link-btn" id="new-booking-btn">
+            Book Another Service
+          </button>
+        </div>
+      </main>
+    </section>
+
+    <!-- ===================== FOOTER / CONTACT ===================== -->
+    <footer id="contact" class="site-footer">
+      <div class="footer-inner">
+        <a href="#home" class="logo" aria-label="PIT STOP home">
+          <span class="logo-badge">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+              />
+            </svg>
+          </span>
+          <span class="logo-text">PIT <span class="dot">•</span> STOP</span>
+        </a>
+
+        <div class="footer-contact">
+          <a class="big" href="tel:1800748786">1-800-PITSTOP</a>
+          <p>Serving the Kingdom of Bahrain · Residence &amp; Office Suites</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="year-now"></span> PIT • STOP Mobile Mechanics. All rights
+        reserved.
+      </div>
+    </footer>
 
     <script>
       const form = document.getElementById('booking-form');
@@ -492,6 +909,9 @@
       const yearSelect = document.getElementById('year');
       const locationSelect = document.getElementById('location');
       const serviceSelect = document.getElementById('service');
+
+      document.getElementById('year-now').textContent =
+        new Date().getFullYear();
 
       // ---- Render every <select> from the single /api/options source ----
       function addGroups(select, groups, labelKey, optionsKey) {
@@ -617,7 +1037,9 @@
           confirmation.classList.remove('show');
           formView.style.display = 'block';
           clearError();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          document
+            .getElementById('book')
+            .scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
       loadOptions();
