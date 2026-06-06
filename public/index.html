@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revive Mobile Auto — Elite Concierge Mechanics</title>
+    <meta
+      name="description"
+      content="Revive Mobile Auto — elite concierge mobile mechanics in Bahrain. A master technician comes to your residence or office to service your car."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0d0d0f;
+        --card: #15151c;
+        --card-border: rgba(201, 162, 39, 0.18);
+        --field-bg: #0f0f14;
+        --field-border: rgba(255, 255, 255, 0.08);
+        --gold: #c9a227;
+        --gold-light: #f3d779;
+        --gold-grad: linear-gradient(135deg, #f3d779 0%, #c9a227 55%, #a8851a 100%);
+        --text: #ece9e3;
+        --muted: #8a8a93;
+        --error: #e06363;
+        --success: #6fcf97;
+        --radius: 18px;
+        --serif: 'Playfair Display', Georgia, serif;
+        --sans: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        background-image:
+          radial-gradient(
+            900px circle at 50% -10%,
+            rgba(201, 162, 39, 0.1),
+            transparent 60%
+          ),
+          radial-gradient(
+            700px circle at 100% 100%,
+            rgba(201, 162, 39, 0.05),
+            transparent 55%
+          );
+        color: var(--text);
+        font-family: var(--sans);
+        font-weight: 300;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 48px 20px 64px;
+      }
+
+      /* ---------------- Header ---------------- */
+      header {
+        text-align: center;
+        margin-bottom: 38px;
+        max-width: 640px;
+      }
+
+      .brand {
+        font-family: var(--serif);
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        font-size: clamp(2.1rem, 6vw, 3.4rem);
+        line-height: 1.05;
+        margin: 0;
+        background: linear-gradient(180deg, #ffffff 0%, #cfcfcf 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        margin: 12px 0 0;
+        font-size: clamp(0.72rem, 2.4vw, 0.85rem);
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        font-weight: 500;
+        background: var(--gold-grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ---------------- Card ---------------- */
+      .card {
+        width: 100%;
+        max-width: 620px;
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius);
+        padding: clamp(26px, 5vw, 48px);
+        box-shadow:
+          0 30px 70px -20px rgba(0, 0, 0, 0.75),
+          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+
+      .card-title {
+        font-family: var(--serif);
+        font-weight: 700;
+        font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+        margin: 0;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 14px;
+      }
+
+      .card-title::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 64px;
+        height: 3px;
+        border-radius: 3px;
+        background: var(--gold-grad);
+      }
+
+      .tagline {
+        color: var(--muted);
+        font-size: 0.96rem;
+        margin: 18px 0 30px;
+        max-width: 48ch;
+      }
+
+      /* ---------------- Form ---------------- */
+      .field {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--gold);
+        margin-bottom: 9px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        background: var(--field-bg);
+        border: 1px solid var(--field-border);
+        border-radius: 11px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 0.98rem;
+        font-weight: 400;
+        padding: 14px 15px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease,
+          background 0.2s ease;
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      input::placeholder {
+        color: #5a5a63;
+      }
+
+      select {
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c9a227' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        padding-right: 42px;
+        cursor: pointer;
+      }
+
+      select option,
+      select optgroup {
+        background: #15151c;
+        color: var(--text);
+      }
+
+      select optgroup {
+        color: var(--gold-light);
+        font-weight: 600;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.22);
+        background: #121219;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      /* ---------------- Submit button ---------------- */
+      button[type='submit'] {
+        width: 100%;
+        margin-top: 10px;
+        border: none;
+        border-radius: 12px;
+        padding: 16px 20px;
+        font-family: var(--sans);
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #1a1304;
+        background: var(--gold-grad);
+        cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        box-shadow: 0 12px 28px -10px rgba(201, 162, 39, 0.55);
+      }
+
+      button[type='submit']:hover {
+        filter: brightness(1.06);
+        box-shadow: 0 16px 34px -10px rgba(201, 162, 39, 0.7);
+      }
+
+      button[type='submit']:active {
+        transform: translateY(1px);
+      }
+
+      button[type='submit']:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        filter: grayscale(0.2);
+      }
+
+      /* ---------------- Messages ---------------- */
+      .message {
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin-bottom: 22px;
+        font-size: 0.95rem;
+        display: none;
+      }
+
+      .message.show {
+        display: block;
+      }
+
+      .message.error {
+        background: rgba(224, 99, 99, 0.1);
+        border: 1px solid rgba(224, 99, 99, 0.4);
+        color: var(--error);
+      }
+
+      /* Elegant success confirmation that replaces the form */
+      .confirmation {
+        display: none;
+        text-align: center;
+        padding: 22px 8px 8px;
+      }
+
+      .confirmation.show {
+        display: block;
+        animation: fadeUp 0.5s ease both;
+      }
+
+      .confirmation .check {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 22px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(201, 162, 39, 0.12);
+        border: 1px solid rgba(201, 162, 39, 0.45);
+      }
+
+      .confirmation .check svg {
+        width: 34px;
+        height: 34px;
+        stroke: var(--gold-light);
+      }
+
+      .confirmation h2 {
+        font-family: var(--serif);
+        font-weight: 700;
+        font-size: 1.6rem;
+        margin: 0 0 10px;
+      }
+
+      .confirmation p {
+        color: var(--muted);
+        margin: 0 auto 8px;
+        max-width: 44ch;
+      }
+
+      .confirmation .booking-ref {
+        margin-top: 16px;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .confirmation .booking-ref span {
+        color: var(--text);
+        letter-spacing: 0.04em;
+        text-transform: none;
+      }
+
+      .link-btn {
+        margin-top: 26px;
+        background: none;
+        border: 1px solid var(--field-border);
+        color: var(--text);
+        border-radius: 10px;
+        padding: 12px 22px;
+        font-family: var(--sans);
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+        cursor: pointer;
+        transition: border-color 0.2s ease, color 0.2s ease;
+      }
+
+      .link-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold-light);
+      }
+
+      footer {
+        margin-top: 34px;
+        color: #54545c;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-align: center;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ---------------- Mobile ---------------- */
+      @media (max-width: 520px) {
+        body {
+          padding: 32px 14px 48px;
+        }
+        .row {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="brand">REVIVE MOBILE AUTO</h1>
+      <p class="subtitle">Elite Concierge Mechanics</p>
+    </header>
+
+    <main class="card">
+      <!-- Form view -->
+      <div id="form-view">
+        <h2 class="card-title">Experience Seamless Care</h2>
+        <p class="tagline">
+          Skip the waiting room. Entrust your vehicle to our master technicians
+          from the luxury of your residence or office suite.
+        </p>
+
+        <div id="error-message" class="message error"></div>
+
+        <form id="booking-form" novalidate>
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="John Doe"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="e.g., +973 3333 4444"
+              autocomplete="tel"
+              required
+            />
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="car">Car Make &amp; Model</label>
+              <select id="car" name="car" required>
+                <option value="" disabled selected>-- Select Your Car --</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="year">Year</label>
+              <select id="year" name="year" required>
+                <option value="" disabled selected>-- Select Year --</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="location">Vehicle Current Location (Bahrain)</label>
+            <select id="location" name="location" required>
+              <option value="" disabled selected>-- Select Location --</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="service">Service / Spare Part Needed</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>
+                -- Select Service Required --
+              </option>
+            </select>
+          </div>
+
+          <button type="submit" id="submit-btn">
+            Schedule Priority Service
+          </button>
+        </form>
+      </div>
+
+      <!-- Confirmation view -->
+      <div id="confirmation" class="confirmation">
+        <div class="check">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2>Priority Service Booked</h2>
+        <p>
+          Your priority service is booked — a concierge will contact you
+          shortly.
+        </p>
+        <p class="booking-ref">
+          Reference: <span id="booking-id">—</span>
+        </p>
+        <button type="button" class="link-btn" id="new-booking-btn">
+          Book Another Service
+        </button>
+      </div>
+    </main>
+
+    <footer>Serving the Kingdom of Bahrain · Residence &amp; Office Suites</footer>
+
+    <script>
+      const form = document.getElementById('booking-form');
+      const formView = document.getElementById('form-view');
+      const confirmation = document.getElementById('confirmation');
+      const errorBox = document.getElementById('error-message');
+      const submitBtn = document.getElementById('submit-btn');
+      const bookingIdEl = document.getElementById('booking-id');
+
+      const carSelect = document.getElementById('car');
+      const yearSelect = document.getElementById('year');
+      const locationSelect = document.getElementById('location');
+      const serviceSelect = document.getElementById('service');
+
+      // ---- Render every <select> from the single /api/options source ----
+      function addGroups(select, groups, labelKey, optionsKey) {
+        groups.forEach((g) => {
+          const og = document.createElement('optgroup');
+          og.label = g[labelKey];
+          g[optionsKey].forEach((opt) => {
+            const o = document.createElement('option');
+            o.value = opt;
+            o.textContent = opt;
+            og.appendChild(o);
+          });
+          select.appendChild(og);
+        });
+      }
+
+      async function loadOptions() {
+        try {
+          const res = await fetch('/api/options');
+          if (!res.ok) throw new Error('Failed to load options');
+          const data = await res.json();
+
+          // Cars: grouped by make, value encodes "Make|Model"
+          data.cars.forEach((makeGroup) => {
+            const og = document.createElement('optgroup');
+            og.label = makeGroup.make;
+            makeGroup.models.forEach((model) => {
+              const o = document.createElement('option');
+              o.value = makeGroup.make + '|' + model;
+              o.textContent = makeGroup.make + ' ' + model;
+              og.appendChild(o);
+            });
+            carSelect.appendChild(og);
+          });
+
+          // Years
+          data.years.forEach((y) => {
+            const o = document.createElement('option');
+            o.value = y;
+            o.textContent = y;
+            yearSelect.appendChild(o);
+          });
+
+          // Locations & services: grouped option lists
+          addGroups(locationSelect, data.locations, 'group', 'options');
+          addGroups(serviceSelect, data.services, 'group', 'options');
+        } catch (err) {
+          showError(
+            'We could not load the booking options. Please refresh the page.',
+          );
+        }
+      }
+
+      function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.classList.add('show');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      function clearError() {
+        errorBox.textContent = '';
+        errorBox.classList.remove('show');
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearError();
+
+        // Basic client-side guard (server validates authoritatively)
+        if (!form.checkValidity()) {
+          showError('Please complete every field before scheduling.');
+          form.reportValidity();
+          return;
+        }
+
+        const [carMake, carModel] = carSelect.value.split('|');
+        const payload = {
+          fullName: document.getElementById('fullName').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          carMake,
+          carModel,
+          year: Number(yearSelect.value),
+          location: locationSelect.value,
+          service: serviceSelect.value,
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Scheduling…';
+
+        try {
+          const res = await fetch('/api/bookings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (!res.ok || !data.success) {
+            const msg = Array.isArray(data.message)
+              ? data.message.join(' ')
+              : data.message ||
+                'Something went wrong while booking. Please try again.';
+            throw new Error(msg);
+          }
+
+          bookingIdEl.textContent = data.bookingId;
+          formView.style.display = 'none';
+          confirmation.classList.add('show');
+          form.reset();
+          confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (err) {
+          showError(err.message);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Schedule Priority Service';
+        }
+      });
+
+      document
+        .getElementById('new-booking-btn')
+        .addEventListener('click', () => {
+          confirmation.classList.remove('show');
+          formView.style.display = 'block';
+          clearError();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+      loadOptions();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+# compiled output
+/dist
+/node_modules
+
+# logs
+*.log
+npm-debug.log*
+
+# database
+*.sqlite
+*.sqlite3
+*.db
+revive.db
+
+# env
+.env
+.env.local
+
+# IDE / OS
+.idea
+.DS_Store
+Thumbs.db

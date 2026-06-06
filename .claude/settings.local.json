@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell($winget = \\(Get-Command winget -ErrorAction SilentlyContinue\\); if \\($winget\\) { \"winget: $\\($winget.Source\\)\" } else { \"winget: NOT FOUND\" }; $choco = \\(Get-Command choco -ErrorAction SilentlyContinue\\); if \\($choco\\) { \"choco: $\\($choco.Source\\)\" } else { \"choco: NOT FOUND\" })",
+      "PowerShell($nodeDir = \"$env:ProgramFiles\\\\nodejs\"; $env:Path = \"$nodeDir;$env:Path\"; & \"$nodeDir\\\\node.exe\" --version; & \"$nodeDir\\\\npm.cmd\" --version)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}
