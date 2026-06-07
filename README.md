@@ -3,10 +3,18 @@
 **Elite Concierge Mechanics — Kingdom of Bahrain.**
 
 A "mobile mechanic" booking platform: customers schedule a master technician to
-come to their residence or office suite and service their car on-site. Built as
-a [NestJS](https://nestjs.com/) application backed by
+come to their residence or office suite and service their car on-site. Backed by
 [Supabase](https://supabase.com/) (Postgres) with a single responsive,
 dark-luxury landing page.
+
+It runs in **two modes from the same code**:
+
+- **Production (GitHub Pages):** the landing page in `public/` is a fully static
+  site that talks to Supabase **directly from the browser** (client-side
+  `@supabase/supabase-js`). No server required. See
+  [Deployment](#deployment-github-pages).
+- **Local / optional server:** a [NestJS](https://nestjs.com/) app can serve the
+  same page plus `/api/*` endpoints (server-side Supabase) for local dev.
 
 ---
 
@@ -88,7 +96,35 @@ npm run start:prod   # run the compiled build from /dist
 
 ---
 
+## Deployment (GitHub Pages)
+
+The site is deployed as a **static page** — the browser talks to Supabase
+directly, so no Node server runs in production. The Supabase URL and publishable
+key are embedded in `public/index.html` (publishable keys are client-safe).
+
+A GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) publishes the
+`public/` folder (which includes a `CNAME`) to GitHub Pages on every push to
+`main`.
+
+**One-time setup (in your GitHub repo + DNS):**
+
+1. **Repo → Settings → Pages → Build and deployment → Source: _GitHub Actions_.**
+2. Push to `main` (or re-run the workflow) — it builds and deploys automatically.
+3. **DNS** for `garage-pickup.com` (apex):
+   - `A` records → GitHub Pages: `185.199.108.153`, `185.199.109.153`,
+     `185.199.110.153`, `185.199.111.153`
+   - If the domain is managed at another host (e.g. Hostinger), make sure its
+     **CDN / parking is disabled** so it doesn't intercept the domain.
+   - Optionally add `www` as a `CNAME` → `<your-user>.github.io`.
+4. Repo → Settings → Pages → set the custom domain to `garage-pickup.com` and
+   enable **Enforce HTTPS** once the certificate is issued.
+
+---
+
 ## API
+
+> These endpoints exist for the **optional local NestJS server** only. The
+> production static site does not use them — it calls Supabase directly.
 
 ### `POST /api/bookings`
 

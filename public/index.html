@@ -817,7 +817,55 @@
       </div>
     </footer>
 
-    <script>
+    <script type="module">
+      import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+      // Client-side Supabase. The publishable key is safe to expose in the
+      // browser; inserts are governed by the table's open RLS policy. This lets
+      // the site run as a fully static page on GitHub Pages — no server needed.
+      const SUPABASE_URL = 'https://jsxglcvesczvwnrqcsio.supabase.co';
+      const SUPABASE_KEY = 'sb_publishable_vgpSyrI81mK3Hb6MyF4z3w_W-8Fbdus';
+      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+        auth: { persistSession: false },
+      });
+
+      // Dropdown data (mirrors src/constants/options.constants.ts).
+      const OPTIONS = {
+        cars: [
+          { make: 'Toyota', models: ['Camry', 'Corolla', 'RAV4', 'Land Cruiser', 'Hilux', 'Avalon', 'Prius', 'Yaris', 'Supra'] },
+          { make: 'Honda', models: ['Civic', 'Accord', 'CR-V', 'Pilot', 'Odyssey', 'HR-V', 'Fit'] },
+          { make: 'Ford', models: ['F-150', 'Explorer', 'Mustang', 'Edge', 'Escape', 'Ranger'] },
+          { make: 'Nissan', models: ['Altima', 'Maxima', 'Sentra', 'Patrol', 'X-Trail', 'Pathfinder', 'Sunny', 'Kicks', 'Navara'] },
+          { make: 'BMW', models: ['3 Series', '5 Series', '7 Series', 'X1', 'X3', 'X5', 'X7', 'M3', 'M5'] },
+          { make: 'Mercedes-Benz', models: ['A-Class', 'C-Class', 'E-Class', 'S-Class', 'GLA', 'GLC', 'GLE', 'GLS', 'G-Class'] },
+          { make: 'Hyundai', models: ['Elantra', 'Sonata', 'Accent', 'Tucson', 'Santa Fe', 'Creta', 'Palisade'] },
+          { make: 'Kia', models: ['Optima', 'Cerato', 'Rio', 'Sportage', 'Sorento', 'Seltos', 'Carnival'] },
+          { make: 'Lexus', models: ['IS', 'RC', 'RC F', 'ES', 'LS', 'NX', 'RX', 'GX', 'LX', 'LC'] },
+          { make: 'Chevrolet', models: ['Malibu', 'Impala', 'Camaro', 'Tahoe', 'Suburban', 'Silverado', 'Captiva', 'Traverse'] },
+          { make: 'Mitsubishi', models: ['Lancer', 'Pajero', 'Montero Sport', 'Outlander', 'ASX', 'L200'] },
+          { make: 'Mazda', models: ['Mazda3', 'Mazda6', 'CX-3', 'CX-5', 'CX-9', 'MX-5'] },
+          { make: 'Volkswagen', models: ['Golf', 'Passat', 'Jetta', 'Tiguan', 'Touareg', 'Teramont'] },
+          { make: 'Audi', models: ['A3', 'A4', 'A6', 'A8', 'Q3', 'Q5', 'Q7', 'Q8'] },
+          { make: 'GMC', models: ['Sierra', 'Yukon', 'Acadia', 'Terrain'] },
+          { make: 'Jeep', models: ['Wrangler', 'Grand Cherokee', 'Cherokee', 'Compass'] },
+        ],
+        locations: [
+          { group: 'Capital Governorate', options: ['Manama', 'Tubli', 'Juffair', 'Seef', 'Adliya', 'Hoora', 'Sitra', 'Gudaibiya', 'Karbabad', 'Al Bilad Al Qadeem', 'Umm Al Hassam'] },
+          { group: 'Central Areas / Southern Governorate', options: ['Isa Town', 'Riffa (East)', 'Riffa (West)', 'Sanad', "A'ali", 'Hamad Town', 'Zallaq'] },
+          { group: 'Muharraq Governorate', options: ['Muharraq', 'Arad', 'Hidd', 'Galali', 'Busaiteen', 'Amwaj Islands'] },
+          { group: 'Northern Governorate', options: ['Hamad Town', 'Saar', 'Budaiya', 'Janabiyah', 'Diraz', 'Bani Jamra', 'Hamala'] },
+        ],
+        services: [
+          { group: 'Routine Maintenance', options: ['Oil & Filter Change', 'Engine Air Filter Replacement', 'Cabin AC Filter Renewal', 'Wiper Blades Replacement', 'Fluid Top-Up & Level Check'] },
+          { group: 'Brakes & Suspension', options: ['Brake Pads Replacement', 'Brake Rotors / Discs Renewal', 'Brake Fluid Flush', 'Shock Absorbers & Struts Service', 'Control Arm / Ball Joint Replacement'] },
+          { group: 'Engine & Ignition', options: ['Spark Plugs Renewal', 'Ignition Coil Replacement', 'Serpentine Belt Replacement', 'Engine Thermostat Replacement', 'Radiator Hose Repair'] },
+          { group: 'Electrical & Charging System', options: ['Battery Replacement', 'Alternator Replacement', 'Starter Motor Replacement', 'Fuses & Wiring Diagnostics'] },
+          { group: 'Emergency Assistance', options: ['Flat Tire Change (Install Spare)', 'Battery Jump Start Assist', 'Fuel Delivery (Out of Gas)'] },
+          { group: 'Diagnostics & Overrides', options: ['Computer OBD2 Error Code Scanning', 'Check Engine Light Inspection', 'Other / Custom Repair Diagnostic'] },
+        ],
+      };
+      const YEARS = Array.from({ length: 2026 - 1990 + 1 }, (_, i) => 2026 - i);
+
       const form = document.getElementById('booking-form');
       const formView = document.getElementById('form-view');
       const confirmation = document.getElementById('confirmation');
@@ -885,36 +933,28 @@
         });
       }
 
-      async function loadOptions() {
-        try {
-          const res = await fetch('/api/options');
-          if (!res.ok) throw new Error('Failed to load options');
-          const data = await res.json();
-
-          data.cars.forEach((makeGroup) => {
-            const og = document.createElement('optgroup');
-            og.label = makeGroup.make;
-            makeGroup.models.forEach((model) => {
-              const o = document.createElement('option');
-              o.value = makeGroup.make + '|' + model;
-              o.textContent = makeGroup.make + ' ' + model;
-              og.appendChild(o);
-            });
-            carSelect.appendChild(og);
-          });
-
-          data.years.forEach((y) => {
+      function renderOptions() {
+        OPTIONS.cars.forEach((makeGroup) => {
+          const og = document.createElement('optgroup');
+          og.label = makeGroup.make;
+          makeGroup.models.forEach((model) => {
             const o = document.createElement('option');
-            o.value = y;
-            o.textContent = y;
-            yearSelect.appendChild(o);
+            o.value = makeGroup.make + '|' + model;
+            o.textContent = makeGroup.make + ' ' + model;
+            og.appendChild(o);
           });
+          carSelect.appendChild(og);
+        });
 
-          addGroups(locationSelect, data.locations, 'group', 'options');
-          addGroups(serviceSelect, data.services, 'group', 'options');
-        } catch (err) {
-          showError('We could not load the booking options. Please refresh the page.');
-        }
+        YEARS.forEach((y) => {
+          const o = document.createElement('option');
+          o.value = y;
+          o.textContent = y;
+          yearSelect.appendChild(o);
+        });
+
+        addGroups(locationSelect, OPTIONS.locations, 'group', 'options');
+        addGroups(serviceSelect, OPTIONS.services, 'group', 'options');
       }
 
       function showError(msg) {
@@ -938,6 +978,12 @@
           return;
         }
 
+        const phoneVal = document.getElementById('phone').value.trim();
+        if (!/^\+?[0-9\s\-()]{6,20}$/.test(phoneVal)) {
+          showError('Please provide a valid phone number, e.g. +973 3333 4444.');
+          return;
+        }
+
         const [carMake, carModel] = carSelect.value.split('|');
         const payload = {
           fullName: document.getElementById('fullName').value.trim(),
@@ -953,28 +999,31 @@
         submitBtn.textContent = 'Scheduling…';
 
         try {
-          const res = await fetch('/api/bookings', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          });
+          const { data, error } = await supabase
+            .from('bookings')
+            .insert({
+              full_name: payload.fullName,
+              phone: payload.phone,
+              car_make: payload.carMake,
+              car_model: payload.carModel,
+              year: payload.year,
+              location: payload.location,
+              service: payload.service,
+            })
+            .select('id')
+            .single();
 
-          const data = await res.json().catch(() => ({}));
+          if (error) throw new Error(error.message);
 
-          if (!res.ok || !data.success) {
-            const msg = Array.isArray(data.message)
-              ? data.message.join(' ')
-              : data.message || 'Something went wrong while booking. Please try again.';
-            throw new Error(msg);
-          }
-
-          bookingIdEl.textContent = data.bookingId;
+          bookingIdEl.textContent = data.id;
           formView.style.display = 'none';
           confirmation.classList.add('show');
           form.reset();
           confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } catch (err) {
-          showError(err.message);
+          showError(
+            err.message || 'Something went wrong while booking. Please try again.',
+          );
         } finally {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Schedule Priority Service';
@@ -988,7 +1037,7 @@
         document.getElementById('book').scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
 
-      loadOptions();
+      renderOptions();
     </script>
   </body>
 </html>
