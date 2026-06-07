@@ -9,7 +9,6 @@
       content="PIT STOP — your mobile mechanic in Bahrain. A master technician comes to your residence or office to service your car. Book online in minutes."
     />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -37,19 +36,9 @@
         --sans: 'Inter', system-ui, -apple-system, sans-serif;
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      html, body { margin: 0; padding: 0; }
 
       body {
         background: var(--bg);
@@ -58,623 +47,406 @@
         font-weight: 300;
         line-height: 1.6;
         min-height: 100vh;
-        /* faint blueprint grid */
+        overflow-x: hidden;
         background-image:
           linear-gradient(rgba(197, 242, 60, 0.035) 1px, transparent 1px),
           linear-gradient(90deg, rgba(197, 242, 60, 0.035) 1px, transparent 1px),
-          radial-gradient(
-            900px circle at 50% -5%,
-            rgba(197, 242, 60, 0.08),
-            transparent 60%
-          );
+          radial-gradient(900px circle at 80% -5%, rgba(197, 242, 60, 0.1), transparent 55%);
         background-size: 46px 46px, 46px 46px, 100% 100%;
       }
 
-      a {
-        color: inherit;
-      }
+      a { color: inherit; }
 
-      /* ============================================================ */
-      /* Navbar                                                        */
-      /* ============================================================ */
+      /* ===================== NAVBAR ===================== */
       .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
+        position: sticky; top: 0; z-index: 50;
         background: rgba(11, 13, 9, 0.82);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       }
-
       .nav {
-        max-width: 1180px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        gap: 22px;
-        padding: 13px 24px;
+        max-width: 1180px; margin: 0 auto;
+        display: flex; align-items: center; gap: 22px; padding: 13px 24px;
       }
-
-      /* Brand / logo */
       .logo {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        border: 2px solid var(--lime);
-        border-radius: 14px;
-        padding: 5px 15px 5px 6px;
-        flex-shrink: 0;
+        display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+        border: 2px solid var(--lime); border-radius: 14px;
+        padding: 5px 15px 5px 6px; flex-shrink: 0;
+        transition: box-shadow .3s ease;
       }
-
+      .logo:hover { box-shadow: 0 0 22px rgba(197, 242, 60, 0.35); }
       .logo-badge {
-        width: 34px;
-        height: 34px;
-        border-radius: 9px;
-        background: var(--lime-grad);
-        display: grid;
-        place-items: center;
-        box-shadow: 0 0 16px rgba(197, 242, 60, 0.4);
+        width: 34px; height: 34px; border-radius: 9px; background: var(--lime-grad);
+        display: grid; place-items: center; box-shadow: 0 0 16px rgba(197, 242, 60, 0.4);
       }
-
-      .logo-badge svg {
-        width: 19px;
-        height: 19px;
-        stroke: var(--ink);
-      }
-
+      .logo-badge svg { width: 19px; height: 19px; stroke: var(--ink); }
       .logo-text {
-        font-family: var(--display);
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        font-size: 1.05rem;
-        color: var(--text);
-        white-space: nowrap;
+        font-family: var(--display); font-weight: 800; letter-spacing: 0.05em;
+        font-size: 1.05rem; color: var(--text); white-space: nowrap;
       }
-
-      .logo-text .dot {
-        color: var(--lime);
-        margin: 0 2px;
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 30px;
-        list-style: none;
-        margin: 0 0 0 18px;
-        padding: 0;
-      }
-
+      .logo-text .dot { color: var(--lime); margin: 0 2px; }
+      .nav-links { display: flex; gap: 30px; list-style: none; margin: 0 0 0 18px; padding: 0; }
       .nav-links a {
-        text-decoration: none;
-        color: var(--muted);
-        font-size: 0.95rem;
-        font-weight: 500;
-        transition: color 0.2s ease;
+        text-decoration: none; color: var(--muted); font-size: 0.95rem;
+        font-weight: 500; position: relative; transition: color 0.2s ease;
       }
-
-      .nav-links a:hover {
-        color: var(--text);
+      .nav-links a::after {
+        content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
+        background: var(--lime-grad); border-radius: 2px; transition: width .25s ease;
       }
-
-      .nav-cta {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        gap: 22px;
-      }
-
+      .nav-links a:hover { color: var(--text); }
+      .nav-links a:hover::after { width: 100%; }
+      .nav-cta { margin-left: auto; display: flex; align-items: center; gap: 22px; }
       .phone {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        font-weight: 600;
-        font-size: 0.92rem;
-        letter-spacing: 0.02em;
-        color: var(--text);
-        text-decoration: none;
-        white-space: nowrap;
+        display: inline-flex; align-items: center; gap: 9px; font-weight: 600;
+        font-size: 0.92rem; letter-spacing: 0.02em; color: var(--text);
+        text-decoration: none; white-space: nowrap;
       }
-
       .live-dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: #ff4d4d;
-        box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55);
-        animation: pulse 1.8s infinite;
+        width: 9px; height: 9px; border-radius: 50%; background: #ff4d4d;
+        box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55); animation: pulse 1.8s infinite;
       }
-
       .btn-book {
-        background: var(--lime-grad);
-        color: var(--ink);
-        font-weight: 700;
-        font-size: 0.9rem;
-        text-decoration: none;
-        padding: 11px 22px;
-        border-radius: 999px;
-        white-space: nowrap;
+        background: var(--lime-grad); color: var(--ink); font-weight: 700; font-size: 0.9rem;
+        text-decoration: none; padding: 11px 22px; border-radius: 999px; white-space: nowrap;
         transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
         box-shadow: 0 10px 24px -10px rgba(197, 242, 60, 0.7);
       }
-
-      .btn-book:hover {
-        filter: brightness(1.06);
-        box-shadow: 0 14px 30px -10px rgba(197, 242, 60, 0.85);
-      }
-
-      .btn-book:active {
-        transform: translateY(1px);
-      }
+      .btn-book:hover { filter: brightness(1.06); box-shadow: 0 14px 30px -10px rgba(197, 242, 60, 0.85); }
+      .btn-book:active { transform: translateY(1px); }
 
       @keyframes pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55);
-        }
-        70% {
-          box-shadow: 0 0 0 7px rgba(255, 77, 77, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
-        }
+        0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.55); }
+        70% { box-shadow: 0 0 0 7px rgba(255, 77, 77, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
       }
 
-      /* ============================================================ */
-      /* Layout helpers                                               */
-      /* ============================================================ */
-      section,
-      footer {
-        scroll-margin-top: 84px;
-      }
-
-      .wrap {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      /* ============================================================ */
-      /* Hero                                                         */
-      /* ============================================================ */
-      .hero {
-        text-align: center;
-        padding: 72px 20px 26px;
-      }
-
-      .hero .eyebrow {
-        display: inline-block;
-        font-size: 0.72rem;
-        letter-spacing: 0.34em;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: var(--lime);
-        border: 1px solid rgba(197, 242, 60, 0.35);
-        border-radius: 999px;
-        padding: 7px 16px;
-        margin-bottom: 26px;
-      }
-
-      .hero h1 {
-        font-family: var(--display);
-        font-weight: 800;
-        letter-spacing: 0.02em;
-        font-size: clamp(2.6rem, 8vw, 5rem);
-        line-height: 1.02;
-        margin: 0;
-      }
-
-      .hero h1 .dot {
-        color: var(--lime);
-      }
-
-      .hero .lead {
-        color: var(--muted);
-        font-size: clamp(1rem, 2.4vw, 1.18rem);
-        max-width: 46ch;
-        margin: 20px auto 0;
-      }
-
-      /* ============================================================ */
-      /* How it works                                                 */
-      /* ============================================================ */
-      .how {
-        padding: 56px 0 20px;
-      }
-
+      /* ===================== Layout helpers ===================== */
+      section, footer { scroll-margin-top: 84px; }
+      .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
       .section-title {
-        font-family: var(--display);
-        font-weight: 700;
-        font-size: clamp(1.7rem, 4.5vw, 2.4rem);
-        text-align: center;
-        margin: 0 0 8px;
+        font-family: var(--display); font-weight: 700;
+        font-size: clamp(1.7rem, 4.5vw, 2.4rem); text-align: center; margin: 0 0 8px;
+      }
+      .section-sub { text-align: center; color: var(--muted); margin: 0 auto 44px; max-width: 52ch; }
+
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0; transform: translateY(26px);
+        transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+      }
+      .reveal.visible { opacity: 1; transform: none; }
+      .reveal[data-delay="1"] { transition-delay: .08s; }
+      .reveal[data-delay="2"] { transition-delay: .16s; }
+      .reveal[data-delay="3"] { transition-delay: .24s; }
+      .reveal[data-delay="4"] { transition-delay: .32s; }
+      /* Respect reduced-motion for scroll/entrance effects, but keep the
+         hero car's gentle looping animation as the brand centerpiece. */
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
       }
 
-      .section-sub {
-        text-align: center;
-        color: var(--muted);
-        margin: 0 auto 40px;
-        max-width: 50ch;
+      /* ===================== HERO ===================== */
+      .hero { padding: 60px 0 30px; }
+      .hero-grid {
+        display: grid; grid-template-columns: 1.02fr 1fr; gap: 50px; align-items: center;
+      }
+      .eyebrow {
+        display: inline-block; font-size: 0.72rem; letter-spacing: 0.3em;
+        text-transform: uppercase; font-weight: 600; color: var(--lime);
+        border: 1px solid rgba(197, 242, 60, 0.35); border-radius: 999px;
+        padding: 7px 16px; margin-bottom: 22px;
+      }
+      .hero h1 {
+        font-family: var(--display); font-weight: 800; letter-spacing: -0.01em;
+        font-size: clamp(2.4rem, 5.4vw, 3.9rem); line-height: 1.04; margin: 0;
+      }
+      .hero h1 .lime {
+        background: var(--lime-grad); -webkit-background-clip: text;
+        background-clip: text; -webkit-text-fill-color: transparent;
+      }
+      .hero .lead {
+        color: var(--muted); font-size: clamp(1rem, 2.2vw, 1.15rem);
+        max-width: 46ch; margin: 20px 0 0;
+      }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+      .btn-primary {
+        background: var(--lime-grad); color: var(--ink); font-weight: 700; font-size: 0.95rem;
+        text-decoration: none; padding: 15px 28px; border-radius: 12px;
+        box-shadow: 0 14px 30px -12px rgba(197, 242, 60, 0.8);
+        transition: filter .2s ease, transform .12s ease;
+      }
+      .btn-primary:hover { filter: brightness(1.06); transform: translateY(-2px); }
+      .btn-ghost {
+        border: 1px solid var(--field-border); color: var(--text); font-weight: 600;
+        font-size: 0.95rem; text-decoration: none; padding: 15px 26px; border-radius: 12px;
+        transition: border-color .2s ease, color .2s ease;
+      }
+      .btn-ghost:hover { border-color: var(--lime); color: var(--lime-light); }
+      .hero-trust {
+        display: flex; align-items: center; gap: 10px; margin-top: 26px;
+        color: var(--muted); font-size: 0.9rem;
+      }
+      .stars { color: var(--lime); letter-spacing: 2px; }
+
+      /* Car stage */
+      .car-stage { position: relative; isolation: isolate; padding: 10px 0 24px; }
+      .car-glow {
+        position: absolute; inset: 6% -4% 4% -4%; z-index: -1;
+        background: radial-gradient(closest-side, rgba(197, 242, 60, 0.4), transparent 72%);
+        filter: blur(34px); animation: glowPulse 5s ease-in-out infinite;
       }
 
-      .steps {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+      /* Animated car illustration */
+      .car-svg { width: 100%; height: auto; display: block; overflow: visible; }
+      .wheel {
+        transform-box: fill-box; transform-origin: center;
+        animation: spin 1.1s linear infinite;
+      }
+      .car-body-group {
+        transform-box: fill-box; transform-origin: center;
+        animation: carBob 2.4s ease-in-out infinite;
+      }
+      .car-shadow {
+        transform-box: fill-box; transform-origin: center;
+        animation: shadowPulse 2.4s ease-in-out infinite;
+      }
+      .road-line { stroke-dasharray: 40 28; animation: roadDash 0.55s linear infinite; }
+      .speed { animation: speedZoom 0.85s linear infinite; }
+      .speed.s2 { animation-delay: 0.28s; }
+      .speed.s3 { animation-delay: 0.52s; }
+
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes carBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      @keyframes shadowPulse {
+        0%, 100% { transform: scaleX(1); opacity: 0.5; }
+        50% { transform: scaleX(0.9); opacity: 0.36; }
+      }
+      @keyframes roadDash { to { stroke-dashoffset: -68; } }
+      @keyframes speedZoom {
+        0% { transform: translateX(60px); opacity: 0; }
+        30% { opacity: 0.9; }
+        100% { transform: translateX(-90px); opacity: 0; }
+      }
+      .car-badge {
+        position: absolute; background: rgba(15, 17, 11, 0.85);
+        border: 1px solid var(--card-border); border-radius: 13px; padding: 10px 14px;
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.8);
+      }
+      .car-badge .k {
+        font-family: var(--display); font-weight: 800; font-size: 1.05rem; color: var(--lime-light);
+      }
+      .car-badge .v {
+        font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+      }
+      .car-badge.b1 { top: -16px; left: -14px; animation: floatY 5.5s ease-in-out infinite; }
+      .car-badge.b2 { bottom: 30px; right: -16px; animation: floatY 7s ease-in-out infinite .4s; }
+      .car-badge.b3 {
+        bottom: 6px; left: 6px; animation: floatY 6s ease-in-out infinite .8s;
+        display: flex; align-items: center; gap: 9px;
       }
 
+      @keyframes floatY {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+      }
+      @keyframes glowPulse {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+      }
+
+      /* ===================== STATS STRIP ===================== */
+      .stats {
+        margin-top: 26px; border-top: 1px solid rgba(255,255,255,.06);
+        border-bottom: 1px solid rgba(255,255,255,.06); background: var(--panel);
+      }
+      .stats-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 36px 24px;
+        max-width: 1180px; margin: 0 auto; text-align: center;
+      }
+      .stat-num {
+        font-family: var(--display); font-weight: 800;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        background: var(--lime-grad); -webkit-background-clip: text;
+        background-clip: text; -webkit-text-fill-color: transparent; line-height: 1;
+      }
+      .stat-label {
+        margin-top: 8px; color: var(--muted); font-size: 0.82rem;
+        text-transform: uppercase; letter-spacing: 0.12em;
+      }
+
+      /* ===================== HOW IT WORKS ===================== */
+      .how { padding: 72px 0 20px; }
+      .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
       .step {
-        background: var(--card);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 16px;
-        padding: 28px 24px;
+        background: var(--card); border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px; padding: 28px 24px;
+        transition: border-color 0.25s ease, transform 0.25s ease, box-shadow .25s ease;
+      }
+      .step:hover {
+        border-color: var(--card-border); transform: translateY(-4px);
+        box-shadow: 0 24px 50px -30px rgba(197, 242, 60, 0.5);
+      }
+      .step-num {
+        font-family: var(--display); font-weight: 800; font-size: 1.05rem; color: var(--ink);
+        background: var(--lime-grad); width: 42px; height: 42px; border-radius: 11px;
+        display: grid; place-items: center; margin-bottom: 18px;
+      }
+      .step h3 { font-family: var(--display); font-weight: 600; font-size: 1.18rem; margin: 0 0 8px; }
+      .step p { color: var(--muted); margin: 0; font-size: 0.96rem; }
+
+      /* ===================== WHY / FEATURES ===================== */
+      .why { padding: 72px 0 20px; }
+      .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+      .feature {
+        background: var(--card); border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px; padding: 26px 22px;
         transition: border-color 0.25s ease, transform 0.25s ease;
       }
-
-      .step:hover {
-        border-color: var(--card-border);
-        transform: translateY(-3px);
+      .feature:hover { border-color: var(--card-border); transform: translateY(-4px); }
+      .feature .ic {
+        width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+        background: rgba(197, 242, 60, 0.12); border: 1px solid rgba(197, 242, 60, 0.3);
+        margin-bottom: 16px;
       }
+      .feature .ic svg { width: 22px; height: 22px; stroke: var(--lime); }
+      .feature h3 { font-family: var(--display); font-weight: 600; font-size: 1.06rem; margin: 0 0 6px; }
+      .feature p { color: var(--muted); margin: 0; font-size: 0.9rem; }
 
-      .step-num {
-        font-family: var(--display);
-        font-weight: 800;
-        font-size: 1.05rem;
-        color: var(--ink);
-        background: var(--lime-grad);
-        width: 42px;
-        height: 42px;
-        border-radius: 11px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 18px;
-      }
-
-      .step h3 {
-        font-family: var(--display);
-        font-weight: 600;
-        font-size: 1.18rem;
-        margin: 0 0 8px;
-      }
-
-      .step p {
-        color: var(--muted);
-        margin: 0;
-        font-size: 0.96rem;
-      }
-
-      /* ============================================================ */
-      /* Booking card                                                 */
-      /* ============================================================ */
-      .book-section {
-        padding: 60px 0 24px;
-      }
-
+      /* ===================== BOOKING CARD ===================== */
+      .book-section { padding: 76px 0 24px; }
       .card {
-        width: 100%;
-        max-width: 640px;
-        margin: 0 auto;
-        background: var(--card);
-        border: 1px solid var(--card-border);
-        border-radius: var(--radius);
+        width: 100%; max-width: 640px; margin: 0 auto; background: var(--card);
+        border: 1px solid var(--card-border); border-radius: var(--radius);
         padding: clamp(26px, 5vw, 46px);
-        box-shadow:
-          0 30px 70px -24px rgba(0, 0, 0, 0.8),
-          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.03);
       }
-
       .card-title {
-        font-family: var(--display);
-        font-weight: 700;
-        font-size: clamp(1.5rem, 4.5vw, 2.1rem);
-        margin: 0;
-        display: inline-block;
-        position: relative;
-        padding-bottom: 14px;
+        font-family: var(--display); font-weight: 700; font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+        margin: 0; display: inline-block; position: relative; padding-bottom: 14px;
       }
-
       .card-title::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 64px;
-        height: 3px;
-        border-radius: 3px;
-        background: var(--lime-grad);
+        content: ''; position: absolute; left: 0; bottom: 0; width: 64px; height: 3px;
+        border-radius: 3px; background: var(--lime-grad);
       }
-
-      .tagline {
-        color: var(--muted);
-        font-size: 0.96rem;
-        margin: 16px 0 30px;
-        max-width: 48ch;
-      }
-
-      .field {
-        margin-bottom: 20px;
-      }
-
+      .tagline { color: var(--muted); font-size: 0.96rem; margin: 16px 0 30px; max-width: 48ch; }
+      .field { margin-bottom: 20px; }
       label {
-        display: block;
-        font-size: 0.7rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: var(--lime);
-        margin-bottom: 9px;
+        display: block; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+        font-weight: 600; color: var(--lime); margin-bottom: 9px;
       }
-
-      input,
-      select {
-        width: 100%;
-        background: var(--field-bg);
-        border: 1px solid var(--field-border);
-        border-radius: 11px;
-        color: var(--text);
-        font-family: var(--sans);
-        font-size: 0.98rem;
-        font-weight: 400;
-        padding: 14px 15px;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease,
-          background 0.2s ease;
-        outline: none;
-        appearance: none;
-        -webkit-appearance: none;
+      input, select {
+        width: 100%; background: var(--field-bg); border: 1px solid var(--field-border);
+        border-radius: 11px; color: var(--text); font-family: var(--sans); font-size: 0.98rem;
+        font-weight: 400; padding: 14px 15px; outline: none; appearance: none; -webkit-appearance: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       }
-
-      input::placeholder {
-        color: #5c6052;
-      }
-
+      input::placeholder { color: #5c6052; }
       select {
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c5f23c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
-        background-repeat: no-repeat;
-        background-position: right 15px center;
-        padding-right: 42px;
-        cursor: pointer;
+        background-repeat: no-repeat; background-position: right 15px center; padding-right: 42px; cursor: pointer;
       }
-
-      select option,
-      select optgroup {
-        background: #14160f;
-        color: var(--text);
+      select option, select optgroup { background: #14160f; color: var(--text); }
+      select optgroup { color: var(--lime-light); font-weight: 600; }
+      input:focus, select:focus {
+        border-color: var(--lime); box-shadow: 0 0 0 3px rgba(197, 242, 60, 0.22); background: #111409;
       }
-
-      select optgroup {
-        color: var(--lime-light);
-        font-weight: 600;
-      }
-
-      input:focus,
-      select:focus {
-        border-color: var(--lime);
-        box-shadow: 0 0 0 3px rgba(197, 242, 60, 0.22);
-        background: #111409;
-      }
-
-      .row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-      }
-
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
       button[type='submit'] {
-        width: 100%;
-        margin-top: 10px;
-        border: none;
-        border-radius: 12px;
-        padding: 16px 20px;
-        font-family: var(--sans);
-        font-size: 0.92rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--ink);
-        background: var(--lime-grad);
-        cursor: pointer;
+        width: 100%; margin-top: 10px; border: none; border-radius: 12px; padding: 16px 20px;
+        font-family: var(--sans); font-size: 0.92rem; font-weight: 700; letter-spacing: 0.12em;
+        text-transform: uppercase; color: var(--ink); background: var(--lime-grad); cursor: pointer;
         transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
         box-shadow: 0 12px 28px -10px rgba(197, 242, 60, 0.6);
       }
-
-      button[type='submit']:hover {
-        filter: brightness(1.06);
-        box-shadow: 0 16px 34px -10px rgba(197, 242, 60, 0.75);
-      }
-
-      button[type='submit']:active {
-        transform: translateY(1px);
-      }
-
-      button[type='submit']:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        filter: grayscale(0.2);
-      }
-
-      .message {
-        border-radius: 12px;
-        padding: 16px 18px;
-        margin-bottom: 22px;
-        font-size: 0.95rem;
-        display: none;
-      }
-
-      .message.show {
-        display: block;
-      }
-
-      .message.error {
-        background: rgba(255, 107, 107, 0.1);
-        border: 1px solid rgba(255, 107, 107, 0.4);
-        color: var(--error);
-      }
-
-      .confirmation {
-        display: none;
-        text-align: center;
-        padding: 22px 8px 8px;
-      }
-
-      .confirmation.show {
-        display: block;
-        animation: fadeUp 0.5s ease both;
-      }
-
+      button[type='submit']:hover { filter: brightness(1.06); box-shadow: 0 16px 34px -10px rgba(197, 242, 60, 0.75); }
+      button[type='submit']:active { transform: translateY(1px); }
+      button[type='submit']:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(0.2); }
+      .message { border-radius: 12px; padding: 16px 18px; margin-bottom: 22px; font-size: 0.95rem; display: none; }
+      .message.show { display: block; }
+      .message.error { background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.4); color: var(--error); }
+      .confirmation { display: none; text-align: center; padding: 22px 8px 8px; }
+      .confirmation.show { display: block; animation: fadeUp 0.5s ease both; }
       .confirmation .check {
-        width: 72px;
-        height: 72px;
-        margin: 0 auto 22px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        background: rgba(197, 242, 60, 0.12);
-        border: 1px solid rgba(197, 242, 60, 0.45);
+        width: 72px; height: 72px; margin: 0 auto 22px; border-radius: 50%; display: grid; place-items: center;
+        background: rgba(197, 242, 60, 0.12); border: 1px solid rgba(197, 242, 60, 0.45);
+        animation: popIn .5s cubic-bezier(.2,1.4,.4,1) both;
       }
-
-      .confirmation .check svg {
-        width: 34px;
-        height: 34px;
-        stroke: var(--lime-light);
-      }
-
-      .confirmation h2 {
-        font-family: var(--display);
-        font-weight: 700;
-        font-size: 1.6rem;
-        margin: 0 0 10px;
-      }
-
-      .confirmation p {
-        color: var(--muted);
-        margin: 0 auto 8px;
-        max-width: 44ch;
-      }
-
+      .confirmation .check svg { width: 34px; height: 34px; stroke: var(--lime-light); }
+      .confirmation h2 { font-family: var(--display); font-weight: 700; font-size: 1.6rem; margin: 0 0 10px; }
+      .confirmation p { color: var(--muted); margin: 0 auto 8px; max-width: 44ch; }
       .confirmation .booking-ref {
-        margin-top: 16px;
-        font-size: 0.78rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--lime);
+        margin-top: 16px; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime);
       }
-
-      .confirmation .booking-ref span {
-        color: var(--text);
-        letter-spacing: 0.04em;
-        text-transform: none;
-      }
-
+      .confirmation .booking-ref span { color: var(--text); letter-spacing: 0.04em; text-transform: none; }
       .link-btn {
-        margin-top: 26px;
-        background: none;
-        border: 1px solid var(--field-border);
-        color: var(--text);
-        border-radius: 10px;
-        padding: 12px 22px;
-        font-family: var(--sans);
-        font-size: 0.85rem;
-        letter-spacing: 0.06em;
-        cursor: pointer;
-        transition: border-color 0.2s ease, color 0.2s ease;
+        margin-top: 26px; background: none; border: 1px solid var(--field-border); color: var(--text);
+        border-radius: 10px; padding: 12px 22px; font-family: var(--sans); font-size: 0.85rem;
+        letter-spacing: 0.06em; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease;
       }
+      .link-btn:hover { border-color: var(--lime); color: var(--lime-light); }
 
-      .link-btn:hover {
-        border-color: var(--lime);
-        color: var(--lime-light);
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes popIn { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+
+      /* ===================== FAQ ===================== */
+      .faq { padding: 76px 0 20px; }
+      .faq-list { max-width: 760px; margin: 0 auto; }
+      details {
+        background: var(--card); border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px; padding: 4px 22px; margin-bottom: 14px; transition: border-color .25s ease;
       }
-
-      /* ============================================================ */
-      /* Footer / Contact                                             */
-      /* ============================================================ */
-      .site-footer {
-        margin-top: 70px;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-        background: var(--panel);
+      details[open] { border-color: var(--card-border); }
+      summary {
+        list-style: none; cursor: pointer; padding: 18px 0; display: flex;
+        align-items: center; justify-content: space-between; gap: 16px;
+        font-family: var(--display); font-weight: 600; font-size: 1.02rem;
       }
+      summary::-webkit-details-marker { display: none; }
+      summary .chev { color: var(--lime); transition: transform .25s ease; flex-shrink: 0; }
+      details[open] summary .chev { transform: rotate(180deg); }
+      details .answer { color: var(--muted); padding: 0 0 20px; font-size: 0.96rem; animation: fadeUp .35s ease both; }
 
+      /* ===================== FOOTER ===================== */
+      .site-footer { margin-top: 80px; border-top: 1px solid rgba(255, 255, 255, 0.06); background: var(--panel); }
       .footer-inner {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-        padding: 40px 24px;
+        display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+        gap: 24px; padding: 40px 24px; max-width: 1180px; margin: 0 auto;
       }
-
-      .footer-contact {
-        text-align: right;
-      }
-
+      .footer-contact { text-align: right; }
       .footer-contact .big {
-        font-family: var(--display);
-        font-weight: 700;
-        font-size: 1.35rem;
-        color: var(--text);
-        text-decoration: none;
+        font-family: var(--display); font-weight: 700; font-size: 1.35rem; color: var(--text); text-decoration: none;
       }
-
-      .footer-contact .big:hover {
-        color: var(--lime-light);
-      }
-
-      .footer-contact p {
-        margin: 6px 0 0;
-        color: var(--muted);
-        font-size: 0.85rem;
-        letter-spacing: 0.06em;
-      }
-
+      .footer-contact .big:hover { color: var(--lime-light); }
+      .footer-contact p { margin: 6px 0 0; color: var(--muted); font-size: 0.85rem; letter-spacing: 0.06em; }
       .footer-bottom {
-        text-align: center;
-        color: #54584c;
-        font-size: 0.78rem;
-        letter-spacing: 0.08em;
-        padding: 0 24px 28px;
+        text-align: center; color: #54584c; font-size: 0.76rem; letter-spacing: 0.04em; padding: 0 24px 28px;
       }
+      .footer-bottom a { color: #6d7263; }
+      .footer-bottom a:hover { color: var(--lime-light); }
 
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(12px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      /* ===================== Responsive ===================== */
+      @media (max-width: 980px) {
+        .features { grid-template-columns: repeat(2, 1fr); }
       }
-
-      /* ============================================================ */
-      /* Responsive                                                   */
-      /* ============================================================ */
       @media (max-width: 920px) {
-        .nav-links,
-        .phone {
-          display: none;
-        }
+        .nav-links, .phone { display: none; }
+        .hero-grid { grid-template-columns: 1fr; gap: 54px; text-align: center; }
+        .hero .lead { margin-left: auto; margin-right: auto; }
+        .hero-actions, .hero-trust { justify-content: center; }
+        .car-stage { max-width: 540px; margin: 0 auto; }
       }
-
-      @media (max-width: 720px) {
-        .steps {
-          grid-template-columns: 1fr;
-        }
-        .footer-inner {
-          flex-direction: column;
-          text-align: center;
-        }
-        .footer-contact {
-          text-align: center;
-        }
+      @media (max-width: 760px) {
+        .steps { grid-template-columns: 1fr; }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .footer-inner { flex-direction: column; text-align: center; }
+        .footer-contact { text-align: center; }
       }
-
       @media (max-width: 520px) {
-        .row {
-          grid-template-columns: 1fr;
-          gap: 0;
-        }
-        .hero {
-          padding-top: 52px;
-        }
+        .features { grid-template-columns: 1fr; }
+        .row { grid-template-columns: 1fr; gap: 0; }
+        .car-badge { transform: scale(.82); }
       }
     </style>
   </head>
@@ -684,16 +456,8 @@
       <nav class="nav">
         <a href="#home" class="logo" aria-label="PIT STOP home">
           <span class="logo-badge">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-              />
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
             </svg>
           </span>
           <span class="logo-text">PIT <span class="dot">•</span> STOP</span>
@@ -707,9 +471,6 @@
         </ul>
 
         <div class="nav-cta">
-          <a class="phone" href="tel:1800748786">
-            <span class="live-dot"></span>1-800-PITSTOP
-          </a>
           <a class="btn-book" href="#book">Book a mechanic</a>
         </div>
       </nav>
@@ -717,46 +478,215 @@
 
     <!-- ===================== HERO ===================== -->
     <section id="home" class="hero">
-      <span class="eyebrow">Elite Mobile Mechanics · Bahrain</span>
-      <h1>PIT <span class="dot">•</span> STOP</h1>
-      <p class="lead">
-        Skip the waiting room. Our master technicians come to your residence or
-        office suite — and get you back on the road.
-      </p>
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow reveal">Elite Mobile Mechanics · Bahrain</span>
+            <h1 class="reveal" data-delay="1">
+              Your mechanic <span class="lime">comes to you.</span>
+            </h1>
+            <p class="lead reveal" data-delay="2">
+              Skip the waiting room. Our vetted master technicians service your
+              car at your residence or office suite — from a routine oil change
+              to roadside rescue.
+            </p>
+            <div class="hero-actions reveal" data-delay="3">
+              <a class="btn-primary" href="#book">Book a mechanic</a>
+              <a class="btn-ghost" href="#how">See how it works</a>
+            </div>
+            <div class="hero-trust reveal" data-delay="4">
+              <span class="stars">★★★★★</span>
+              <span>Rated 4.9/5 by drivers across Bahrain</span>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal" data-delay="2">
+            <div class="car-stage">
+              <div class="car-glow"></div>
+
+              <svg
+                class="car-svg"
+                viewBox="0 0 600 340"
+                role="img"
+                aria-label="Animated mobile mechanic car driving"
+              >
+                <defs>
+                  <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#eaffb0" />
+                    <stop offset="0.5" stop-color="#c5f23c" />
+                    <stop offset="1" stop-color="#9ccf24" />
+                  </linearGradient>
+                  <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#27331c" />
+                    <stop offset="1" stop-color="#0d150a" />
+                  </linearGradient>
+                  <radialGradient id="beamGrad" cx="0%" cy="50%" r="120%">
+                    <stop offset="0" stop-color="#dcff79" stop-opacity="0.85" />
+                    <stop offset="1" stop-color="#dcff79" stop-opacity="0" />
+                  </radialGradient>
+                </defs>
+
+                <!-- ground shadow -->
+                <ellipse class="car-shadow" cx="312" cy="305" rx="206" ry="13" fill="#000" />
+
+                <!-- road -->
+                <line x1="16" y1="300" x2="584" y2="300" stroke="#2a2f22" stroke-width="4" stroke-linecap="round" />
+                <line class="road-line" x1="16" y1="300" x2="584" y2="300" stroke="#c5f23c" stroke-width="4" stroke-linecap="round" opacity="0.7" />
+
+                <!-- speed / motion lines (trailing behind) -->
+                <g stroke="#dcff79" stroke-width="5" stroke-linecap="round">
+                  <line class="speed s1" x1="26" y1="158" x2="84" y2="158" />
+                  <line class="speed s2" x1="14" y1="196" x2="72" y2="196" />
+                  <line class="speed s3" x1="28" y1="234" x2="86" y2="234" />
+                </g>
+
+                <!-- wheels (kept on the road, spinning) -->
+                <g class="wheel">
+                  <circle cx="206" cy="264" r="34" fill="#15170f" stroke="#2c3320" stroke-width="3" />
+                  <circle cx="206" cy="264" r="13" fill="#c5f23c" />
+                  <g stroke="#0e150a" stroke-width="4" stroke-linecap="round">
+                    <line x1="206" y1="252" x2="206" y2="276" />
+                    <line x1="194" y1="264" x2="218" y2="264" />
+                    <line x1="198" y1="256" x2="214" y2="272" />
+                    <line x1="198" y1="272" x2="214" y2="256" />
+                  </g>
+                </g>
+                <g class="wheel">
+                  <circle cx="430" cy="264" r="34" fill="#15170f" stroke="#2c3320" stroke-width="3" />
+                  <circle cx="430" cy="264" r="13" fill="#c5f23c" />
+                  <g stroke="#0e150a" stroke-width="4" stroke-linecap="round">
+                    <line x1="430" y1="252" x2="430" y2="276" />
+                    <line x1="418" y1="264" x2="442" y2="264" />
+                    <line x1="422" y1="256" x2="438" y2="272" />
+                    <line x1="422" y1="272" x2="438" y2="256" />
+                  </g>
+                </g>
+
+                <!-- car body (bobs like suspension) -->
+                <g class="car-body-group">
+                  <!-- headlight beam -->
+                  <path d="M540,238 L600,212 L600,260 Z" fill="url(#beamGrad)" />
+                  <!-- body -->
+                  <path
+                    d="M74,262 C66,238 82,229 102,227 L150,225
+                       C168,196 196,176 240,170 L330,168
+                       C366,170 386,186 410,206 L470,214
+                       C514,218 538,233 542,262
+                       L470,262 A36,36 0 0 0 394,262
+                       L242,262 A36,36 0 0 0 170,262 Z"
+                    fill="url(#bodyGrad)" stroke="#0e150a" stroke-width="2"
+                  />
+                  <!-- greenhouse glass -->
+                  <path
+                    d="M234,172 L324,170 C350,172 364,184 378,202 L224,202
+                       C224,190 226,180 234,172 Z"
+                    fill="url(#glassGrad)"
+                  />
+                  <!-- b-pillar -->
+                  <line x1="300" y1="170" x2="300" y2="202" stroke="#0e150a" stroke-width="3" opacity="0.55" />
+                  <!-- door line + handle -->
+                  <path d="M150,234 L360,231" stroke="#0e150a" stroke-width="2" opacity="0.28" fill="none" />
+                  <rect x="320" y="224" width="22" height="5" rx="2.5" fill="#0e150a" opacity="0.4" />
+                  <!-- headlight -->
+                  <circle cx="529" cy="238" r="6" fill="#fffce0" />
+                  <!-- taillight -->
+                  <rect x="76" y="232" width="8" height="11" rx="2.5" fill="#ff5a5a" />
+                </g>
+              </svg>
+
+              <div class="car-badge b1">
+                <div class="k">45 min</div>
+                <div class="v">Avg. Arrival</div>
+              </div>
+              <div class="car-badge b2">
+                <div class="k">Warranty</div>
+                <div class="v">On Every Job</div>
+              </div>
+              <div class="car-badge b3">
+                <span class="live-dot"></span>
+                <div>
+                  <div class="k" style="font-size:.92rem">On-site Service</div>
+                  <div class="v">We bring the garage</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== STATS ===================== -->
+    <section class="stats">
+      <div class="stats-grid">
+        <div class="reveal"><div class="stat-num" data-target="2000" data-suffix="+">0</div><div class="stat-label">Cars Serviced</div></div>
+        <div class="reveal" data-delay="1"><div class="stat-num" data-target="45" data-suffix=" min">0</div><div class="stat-label">Avg. Arrival</div></div>
+        <div class="reveal" data-delay="2"><div class="stat-num" data-target="30" data-suffix="+">0</div><div class="stat-label">Services Offered</div></div>
+        <div class="reveal" data-delay="3"><div class="stat-num" data-target="7" data-suffix="/7">0</div><div class="stat-label">Days a Week</div></div>
+      </div>
     </section>
 
     <!-- ===================== HOW IT WORKS ===================== -->
     <section id="how" class="how">
       <div class="wrap">
-        <h2 class="section-title">How It Works</h2>
-        <p class="section-sub">
-          Three simple steps between you and a fully serviced car — no garage
-          visit required.
+        <h2 class="section-title reveal">How It Works</h2>
+        <p class="section-sub reveal" data-delay="1">
+          Three simple steps between you and a fully serviced car — no garage visit required.
         </p>
         <div class="steps">
-          <div class="step">
+          <div class="step reveal">
             <div class="step-num">01</div>
             <h3>Book Online</h3>
-            <p>
-              Tell us your car, location and the service you need. It takes under
-              two minutes.
-            </p>
+            <p>Tell us your car, location and the service you need. It takes under two minutes.</p>
           </div>
-          <div class="step">
+          <div class="step reveal" data-delay="1">
             <div class="step-num">02</div>
             <h3>We Come to You</h3>
-            <p>
-              A vetted master technician arrives at your home or office, fully
-              equipped with parts and tools.
-            </p>
+            <p>A vetted master technician arrives at your home or office, fully equipped with parts and tools.</p>
           </div>
-          <div class="step">
+          <div class="step reveal" data-delay="2">
             <div class="step-num">03</div>
             <h3>Drive Away</h3>
-            <p>
-              We service your vehicle on-site and you're ready to go — backed by
-              our workmanship guarantee.
-            </p>
+            <p>We service your vehicle on-site and you're ready to go — backed by our workmanship guarantee.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHY PIT STOP ===================== -->
+    <section class="why">
+      <div class="wrap">
+        <h2 class="section-title reveal">Why PIT • STOP</h2>
+        <p class="section-sub reveal" data-delay="1">
+          Concierge-grade car care, engineered around your schedule.
+        </p>
+        <div class="features">
+          <div class="feature reveal">
+            <div class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3>Vetted Technicians</h3>
+            <p>Background-checked master mechanics with years of dealership experience.</p>
+          </div>
+          <div class="feature reveal" data-delay="1">
+            <div class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18l-2-5H5l-2 5z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M3 11v6h2m12 0h4v-6"/></svg>
+            </div>
+            <h3>We Come to You</h3>
+            <p>Home, office or roadside across all four governorates of Bahrain.</p>
+          </div>
+          <div class="feature reveal" data-delay="2">
+            <div class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3-3a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9l-3 3z"/></svg>
+            </div>
+            <h3>Genuine Parts</h3>
+            <p>OEM-grade spare parts with a workmanship warranty on every job.</p>
+          </div>
+          <div class="feature reveal" data-delay="3">
+            <div class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3>Transparent Pricing</h3>
+            <p>Clear, upfront quotes before any work begins — no surprises.</p>
           </div>
         </div>
       </div>
@@ -764,13 +694,11 @@
 
     <!-- ===================== BOOKING / SERVICES ===================== -->
     <section id="book" class="book-section">
-      <main class="card">
-        <!-- Form view -->
+      <main class="card reveal">
         <div id="form-view">
           <h2 class="card-title">Experience Seamless Care</h2>
           <p class="tagline">
-            Entrust your vehicle to our master technicians from the luxury of
-            your residence or office suite.
+            Entrust your vehicle to our master technicians from the luxury of your residence or office suite.
           </p>
 
           <div id="error-message" class="message error"></div>
@@ -778,38 +706,21 @@
           <form id="booking-form" novalidate>
             <div class="field">
               <label for="fullName">Full Name</label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                placeholder="John Doe"
-                autocomplete="name"
-                required
-              />
+              <input type="text" id="fullName" name="fullName" placeholder="John Doe" autocomplete="name" required />
             </div>
 
             <div class="field">
               <label for="phone">Phone Number</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="e.g., +973 3333 4444"
-                autocomplete="tel"
-                required
-              />
+              <input type="tel" id="phone" name="phone" placeholder="e.g., +973 3333 4444" autocomplete="tel" required />
             </div>
 
             <div class="row">
               <div class="field">
                 <label for="car">Car Make &amp; Model</label>
                 <select id="car" name="car" required>
-                  <option value="" disabled selected>
-                    -- Select Your Car --
-                  </option>
+                  <option value="" disabled selected>-- Select Your Car --</option>
                 </select>
               </div>
-
               <div class="field">
                 <label for="year">Year</label>
                 <select id="year" name="year" required>
@@ -828,42 +739,60 @@
             <div class="field">
               <label for="service">Service / Spare Part Needed</label>
               <select id="service" name="service" required>
-                <option value="" disabled selected>
-                  -- Select Service Required --
-                </option>
+                <option value="" disabled selected>-- Select Service Required --</option>
               </select>
             </div>
 
-            <button type="submit" id="submit-btn">
-              Schedule Priority Service
-            </button>
+            <button type="submit" id="submit-btn">Schedule Priority Service</button>
           </form>
         </div>
 
-        <!-- Confirmation view -->
         <div id="confirmation" class="confirmation">
           <div class="check">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </div>
           <h2>Priority Service Booked</h2>
-          <p>
-            Your priority service is booked — a concierge will contact you
-            shortly.
-          </p>
+          <p>Your priority service is booked — a concierge will contact you shortly.</p>
           <p class="booking-ref">Reference: <span id="booking-id">—</span></p>
-          <button type="button" class="link-btn" id="new-booking-btn">
-            Book Another Service
-          </button>
+          <button type="button" class="link-btn" id="new-booking-btn">Book Another Service</button>
         </div>
       </main>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="faq">
+      <div class="wrap">
+        <h2 class="section-title reveal">Frequently Asked</h2>
+        <p class="section-sub reveal" data-delay="1">Everything you need to know before you book.</p>
+        <div class="faq-list">
+          <details class="reveal" open>
+            <summary>Where in Bahrain do you operate?
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="answer">We cover all four governorates — Capital, Muharraq, Northern and Southern — including Manama, Seef, Juffair, Riffa, Hamad Town, Saar, Budaiya, Muharraq and Amwaj Islands.</div>
+          </details>
+          <details class="reveal" data-delay="1">
+            <summary>How fast can a mechanic reach me?
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="answer">Average arrival is around 45 minutes for priority bookings, depending on your location and time of day. Emergency assistance is dispatched first.</div>
+          </details>
+          <details class="reveal" data-delay="2">
+            <summary>Do you bring the spare parts?
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="answer">Yes. Our technicians arrive fully equipped with OEM-grade parts and tools for your selected service, all covered by a workmanship warranty.</div>
+          </details>
+          <details class="reveal" data-delay="3">
+            <summary>How do I pay?
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="answer">You'll receive a clear, upfront quote before any work begins. Pay on completion by card, BenefitPay or cash — your choice.</div>
+          </details>
+        </div>
+      </div>
     </section>
 
     <!-- ===================== FOOTER / CONTACT ===================== -->
@@ -871,29 +800,20 @@
       <div class="footer-inner">
         <a href="#home" class="logo" aria-label="PIT STOP home">
           <span class="logo-badge">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-              />
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
             </svg>
           </span>
           <span class="logo-text">PIT <span class="dot">•</span> STOP</span>
         </a>
 
         <div class="footer-contact">
-          <a class="big" href="tel:1800748786">1-800-PITSTOP</a>
+          <a class="big" href="#book">Book a mechanic</a>
           <p>Serving the Kingdom of Bahrain · Residence &amp; Office Suites</p>
         </div>
       </div>
       <div class="footer-bottom">
-        © <span id="year-now"></span> PIT • STOP Mobile Mechanics. All rights
-        reserved.
+        © <span id="year-now"></span> PIT • STOP Mobile Mechanics. All rights reserved.
       </div>
     </footer>
 
@@ -910,10 +830,47 @@
       const locationSelect = document.getElementById('location');
       const serviceSelect = document.getElementById('service');
 
-      document.getElementById('year-now').textContent =
-        new Date().getFullYear();
+      document.getElementById('year-now').textContent = new Date().getFullYear();
 
-      // ---- Render every <select> from the single /api/options source ----
+      /* ---- Scroll reveal ---- */
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+      /* ---- Animated stat count-up ---- */
+      const countObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = +el.dataset.target;
+            const suffix = el.dataset.suffix || '';
+            const duration = 1500;
+            const start = performance.now();
+            const tick = (now) => {
+              const p = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+            countObserver.unobserve(el);
+          });
+        },
+        { threshold: 0.5 },
+      );
+      document.querySelectorAll('.stat-num').forEach((el) => countObserver.observe(el));
+
+      /* ---- Render every <select> from the single /api/options source ---- */
       function addGroups(select, groups, labelKey, optionsKey) {
         groups.forEach((g) => {
           const og = document.createElement('optgroup');
@@ -934,7 +891,6 @@
           if (!res.ok) throw new Error('Failed to load options');
           const data = await res.json();
 
-          // Cars: grouped by make, value encodes "Make|Model"
           data.cars.forEach((makeGroup) => {
             const og = document.createElement('optgroup');
             og.label = makeGroup.make;
@@ -947,7 +903,6 @@
             carSelect.appendChild(og);
           });
 
-          // Years
           data.years.forEach((y) => {
             const o = document.createElement('option');
             o.value = y;
@@ -955,13 +910,10 @@
             yearSelect.appendChild(o);
           });
 
-          // Locations & services: grouped option lists
           addGroups(locationSelect, data.locations, 'group', 'options');
           addGroups(serviceSelect, data.services, 'group', 'options');
         } catch (err) {
-          showError(
-            'We could not load the booking options. Please refresh the page.',
-          );
+          showError('We could not load the booking options. Please refresh the page.');
         }
       }
 
@@ -980,7 +932,6 @@
         e.preventDefault();
         clearError();
 
-        // Basic client-side guard (server validates authoritatively)
         if (!form.checkValidity()) {
           showError('Please complete every field before scheduling.');
           form.reportValidity();
@@ -1013,8 +964,7 @@
           if (!res.ok || !data.success) {
             const msg = Array.isArray(data.message)
               ? data.message.join(' ')
-              : data.message ||
-                'Something went wrong while booking. Please try again.';
+              : data.message || 'Something went wrong while booking. Please try again.';
             throw new Error(msg);
           }
 
@@ -1031,16 +981,12 @@
         }
       });
 
-      document
-        .getElementById('new-booking-btn')
-        .addEventListener('click', () => {
-          confirmation.classList.remove('show');
-          formView.style.display = 'block';
-          clearError();
-          document
-            .getElementById('book')
-            .scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+      document.getElementById('new-booking-btn').addEventListener('click', () => {
+        confirmation.classList.remove('show');
+        formView.style.display = 'block';
+        clearError();
+        document.getElementById('book').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
 
       loadOptions();
     </script>

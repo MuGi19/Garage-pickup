@@ -14,7 +14,12 @@
       "Bash(git remote *)",
       "Bash(git branch *)",
       "Bash(git push *)",
-      "PowerShell($conns = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($conns\\) { foreach \\($c in $conns\\) { Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep -Milliseconds 600; \"freed port 3000\" } else { \"port 3000 already free\" })"
+      "PowerShell($conns = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($conns\\) { foreach \\($c in $conns\\) { Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep -Milliseconds 600; \"freed port 3000\" } else { \"port 3000 already free\" })",
+      "Bash(git fetch *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "PowerShell($dir = \"public\\\\assets\"; Move-Item \"$dir\\\\cand1.jpg\" \"$dir\\\\lexus-rcf.jpg\" -Force; Remove-Item \"$dir\\\\cand2.jpg\" -Force -ErrorAction SilentlyContinue; Get-ChildItem $dir | Select-Object Name, @{n='KB';e={[math]::Round\\($_.Length/1KB\\)}})"
     ]
   }
 }

@@ -106,7 +106,7 @@ export const CAR_MAKES: CarMakeGroup[] = [
   },
   {
     make: 'Lexus',
-    models: ['IS', 'ES', 'LS', 'NX', 'RX', 'GX', 'LX', 'LC'],
+    models: ['IS', 'RC', 'RC F', 'ES', 'LS', 'NX', 'RX', 'GX', 'LX', 'LC'],
   },
   {
     make: 'Chevrolet',
