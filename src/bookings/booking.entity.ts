@@ -1,36 +1,30 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-
-@Entity({ name: 'bookings' })
-export class Booking {
-  @PrimaryGeneratedColumn('uuid')
+/**
+ * Booking shape returned by the API (camelCase).
+ *
+ * Persistence now lives in Supabase Postgres (table `public.bookings`, which
+ * uses snake_case columns); the service maps between the two.
+ */
+export interface Booking {
   id: string;
-
-  @Column()
   fullName: string;
-
-  @Column()
   phone: string;
-
-  @Column()
   carMake: string;
-
-  @Column()
   carModel: string;
-
-  @Column('int')
   year: number;
-
-  @Column()
   location: string;
-
-  @Column()
   service: string;
+  createdAt: string;
+}
 
-  @CreateDateColumn()
-  createdAt: Date;
+/** Raw row shape as stored in / returned from Supabase (snake_case). */
+export interface BookingRow {
+  id: string;
+  full_name: string;
+  phone: string;
+  car_make: string;
+  car_model: string;
+  year: number;
+  location: string;
+  service: string;
+  created_at: string;
 }

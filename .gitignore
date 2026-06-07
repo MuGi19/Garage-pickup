@@ -20,3 +20,9 @@ revive.db
 .idea
 .DS_Store
 Thumbs.db
+
+# Agent tooling / skills (machine-local, not part of the app)
+.agents/
+.claude/skills/
+skills-lock.json
+.claude/settings.local.json

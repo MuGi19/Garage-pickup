@@ -4,8 +4,9 @@
 
 A "mobile mechanic" booking platform: customers schedule a master technician to
 come to their residence or office suite and service their car on-site. Built as
-a [NestJS](https://nestjs.com/) application with a SQLite database and a single
-responsive, dark-luxury landing page.
+a [NestJS](https://nestjs.com/) application backed by
+[Supabase](https://supabase.com/) (Postgres) with a single responsive,
+dark-luxury landing page.
 
 ---
 
@@ -13,9 +14,10 @@ responsive, dark-luxury landing page.
 
 - **Single-page booking experience** — serif/gold "dark luxury" theme, fully
   responsive down to mobile.
-- **`bookings` module** — controller + service + DTO + TypeORM entity.
-- **SQLite via TypeORM** — zero-config local database, structured so it can swap
-  to Postgres later (see [Swapping to Postgres](#swapping-to-postgres)).
+- **`bookings` module** — controller + service + DTO.
+- **Supabase (Postgres)** — bookings persist to a cloud Postgres table via
+  `@supabase/supabase-js`. No authentication: submissions are open to everyone
+  (governed by permissive Row Level Security policies).
 - **Validation** — [class-validator](https://github.com/typestack/class-validator)
   on the DTO: required fields, valid phone format, and enum/whitelist checks for
   car make, model, year, location and service.
@@ -30,7 +32,7 @@ responsive, dark-luxury landing page.
 | Layer       | Choice                                          |
 | ----------- | ----------------------------------------------- |
 | Backend     | NestJS (TypeScript)                             |
-| Database    | SQLite (`better-sqlite3`) via TypeORM           |
+| Database    | Supabase / Postgres via `@supabase/supabase-js` |
 | Frontend    | Static `index.html` (vanilla HTML/CSS/JS) served via `ServeStaticModule` |
 | Validation  | class-validator / class-transformer             |
 
@@ -52,14 +54,29 @@ responsive, dark-luxury landing page.
 # 1. Install dependencies
 npm install
 
-# 2. Start in watch mode (auto-reload on changes)
+# 2. Create a .env file in the project root (see below)
+
+# 3. Start in watch mode (auto-reload on changes)
 npm run start:dev
 ```
 
 Then open <http://localhost:3000> in your browser.
 
-A SQLite database file (`revive.db`) is created automatically in the project root
-on first run.
+### Environment variables
+
+Create a `.env` file in the project root with your Supabase credentials:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://<your-project-ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxxxxxxxxxxxx
+```
+
+> `.env` is git-ignored. The publishable key is safe to expose in clients; do
+> **not** put a `service_role` key here.
+
+The booking data lives in a `public.bookings` table in your Supabase project
+(see [Database schema](#database-schema)). The server port can be overridden with
+the `PORT` env var.
 
 ### Other scripts
 
@@ -68,9 +85,6 @@ npm run start        # run once (no watch)
 npm run build        # compile to /dist
 npm run start:prod   # run the compiled build from /dist
 ```
-
-The server port can be overridden with the `PORT` env var, and the database file
-location with `DATABASE_PATH`.
 
 ---
 
@@ -116,13 +130,15 @@ frontend renders its selects from a single source of truth.
 ```
 src/
 ├── main.ts                       # Bootstrap + global ValidationPipe
-├── app.module.ts                 # TypeORM + static assets + feature modules
+├── app.module.ts                 # ConfigModule + Supabase + static assets + features
 ├── constants/
 │   └── options.constants.ts      # Single source of truth for all dropdowns
+├── supabase/
+│   └── supabase.module.ts        # Global provider for the shared Supabase client
 ├── bookings/
-│   ├── booking.entity.ts         # TypeORM entity
+│   ├── booking.entity.ts         # Booking / BookingRow TypeScript types
 │   ├── bookings.controller.ts    # POST /api/bookings, GET /api/bookings
-│   ├── bookings.service.ts       # DB access
+│   ├── bookings.service.ts       # Supabase data access (insert / select)
 │   ├── bookings.module.ts
 │   └── dto/
 │       └── create-booking.dto.ts # class-validator rules
@@ -135,23 +151,39 @@ public/
 
 ---
 
-## Swapping to Postgres
+## Database schema
 
-The app uses TypeORM, so moving off SQLite is a config change in
-`src/app.module.ts`:
+Bookings are stored in a `public.bookings` table in Supabase (Postgres). The
+table uses snake_case columns; `BookingsService` maps them to the camelCase API
+shape. Schema:
 
-```ts
-TypeOrmModule.forRoot({
-  type: 'postgres',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  entities: [Booking],
-  synchronize: false, // use migrations in production
-});
+```sql
+create table public.bookings (
+  id          uuid primary key default gen_random_uuid(),
+  full_name   text not null,
+  phone       text not null,
+  car_make    text not null,
+  car_model   text not null,
+  year        integer not null,
+  location    text not null,
+  service     text not null,
+  created_at  timestamptz not null default now()
+);
+
+alter table public.bookings enable row level security;
+
+-- No auth: anyone may submit a booking.
+create policy "Public can insert bookings" on public.bookings
+  for insert to anon, authenticated with check (true);
+
+-- Open read for the simple admin list (exposes PII — lock down before prod).
+create policy "Public can read bookings" on public.bookings
+  for select to anon, authenticated using (true);
+
+grant select, insert on public.bookings to anon, authenticated;
 ```
 
-Install `pg` (`npm install pg`) and remove `better-sqlite3` if no longer needed.
-The entity, repository, service and controller code remain unchanged.
+> ⚠️ **Security note:** with no authentication, the open `SELECT` policy lets
+> anyone with the publishable key read every booking (including names and phone
+> numbers). Before production, add authentication and restrict reads (e.g. to an
+> admin role / `service_role` on the server), or drop the public `SELECT` policy.
