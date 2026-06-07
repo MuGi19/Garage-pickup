@@ -14,7 +14,9 @@ revive.db
 
 # env
 .env
-.env.local
+.env.*
+# ...but allow the production env file to be committed
+!.env.production
 
 # IDE / OS
 .idea
